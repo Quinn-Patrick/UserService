@@ -34,18 +34,18 @@ public class UserserviceApplication {
 			userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 			
 			userService.saveUser(new User(null, "Quinn", "Quinn_Patrick", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "Gumwax", "Pissmaster", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "Torbus", "AnalBlaster5000", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "Glamwalch", "PissLord", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "Gumwax", "GuyUser", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "Torbus", "Blaster5000", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "Glamwalch", "Shaggy", "1234", new ArrayList<>()));
 			userService.saveUser(new User(null, "Sporkler", "Gonswaldo", "1234", new ArrayList<>()));
 			
-			userService.addRoleToUser("Pissmaster", "ROLE_USER");
-			userService.addRoleToUser("Pissmaster", "ROLE_MANAGER");
-			userService.addRoleToUser("AnalBlaster5000", "ROLE_MANAGER");
+			userService.addRoleToUser("GuyUser", "ROLE_USER");
+			userService.addRoleToUser("GuyUser", "ROLE_MANAGER");
+			userService.addRoleToUser("Blaster5000", "ROLE_MANAGER");
 			userService.addRoleToUser("Gonswaldo", "ROLE_ADMIN");
-			userService.addRoleToUser("PissLord", "ROLE_SUPER_ADMIN");
-			userService.addRoleToUser("PissLord", "ROLE_ADMIN");
-			userService.addRoleToUser("PissLord", "ROLE_USER");
+			userService.addRoleToUser("Shaggy", "ROLE_SUPER_ADMIN");
+			userService.addRoleToUser("Shaggy", "ROLE_ADMIN");
+			userService.addRoleToUser("Shaggy", "ROLE_USER");
 		};
 	}
 
