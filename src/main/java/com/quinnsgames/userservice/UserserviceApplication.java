@@ -38,6 +38,8 @@ public class UserserviceApplication {
 			userService.saveUser(new User(null, "Torbus", "Blaster5000", "1234", new ArrayList<>()));
 			userService.saveUser(new User(null, "Glamwalch", "Shaggy", "1234", new ArrayList<>()));
 			userService.saveUser(new User(null, "Sporkler", "Gonswaldo", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "Thambly", "Grenewald", "1234", new ArrayList<>()));
+			
 			
 			userService.addRoleToUser("GuyUser", "ROLE_USER");
 			userService.addRoleToUser("GuyUser", "ROLE_MANAGER");
