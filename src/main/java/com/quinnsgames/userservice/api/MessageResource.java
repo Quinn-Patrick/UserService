@@ -4,6 +4,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -40,27 +41,25 @@ public class MessageResource {
 	@CrossOrigin
 	@PostMapping(path="/message/send")
 	public ResponseEntity<String> postMessage(HttpServletRequest request, HttpServletResponse response, @RequestBody Message message) throws ServletException, IOException{
-
-		if(!TokenAuthorizer.authorizeUser(response, request.getHeader(AUTHORIZATION), "User is not in this room.")) {
-			if(!TokenAuthorizer.authorizeUser(response, request.getHeader(AUTHORIZATION), "User is not in this room.")) {
-				return ResponseEntity.status(FORBIDDEN).body(null);
-			}
+		log.debug("Attempting to send message to server.");
+		if(!TokenAuthorizer.authorizeUser(response, request.getHeader(AUTHORIZATION), message.getUser1().getUsername())) {
+			return ResponseEntity.status(FORBIDDEN).body("{\"response\": \"Looks like you aren't in this room.\"}");
 		}
 		
 		if(message.getContent().length() > 2048) {
-			return ResponseEntity.status(400).body("Message is too long.");
+			return ResponseEntity.status(400).body("{\"response\": \"Message is too long.\"}");
 		}
 		
 		messageService.PostMessage(message);
 		
-		return ResponseEntity.status(HttpStatus.OK).body("Message sent successfully.");
+		return ResponseEntity.ok("{\"response\": \"Message sent successfully.\"}");
 	}
 	
 	@CrossOrigin
-	@GetMapping(path="/messages/{user1}/{user2}")
+	@GetMapping(path="/messages/{username1}/{username2}")
 	public ResponseEntity<List<Message>> GetMessages(HttpServletRequest request, HttpServletResponse response, @PathVariable String username1, @PathVariable String username2) throws ServletException, IOException{
-		if(!TokenAuthorizer.authorizeUser(response, request.getHeader(AUTHORIZATION), "User is not in this room.")) {
-			if(!TokenAuthorizer.authorizeUser(response, request.getHeader(AUTHORIZATION), "User is not in this room.")) {
+		if(!TokenAuthorizer.authorizeUser(response, request.getHeader(AUTHORIZATION), username1)) {
+			if(!TokenAuthorizer.authorizeUser(response, request.getHeader(AUTHORIZATION), username2)) {
 				return ResponseEntity.status(FORBIDDEN).body(null);
 			}
 		}
@@ -69,7 +68,12 @@ public class MessageResource {
 		
 		List<Message> messages = messageService.GetMessages(user1, user2);
 		
-		return null;
+		for(Message m : messages) {
+			m.getUser1().setPassword("");
+			m.getUser2().setPassword("");
+		}
+		
+		return ResponseEntity.ok(messages);
 	}
 
 }

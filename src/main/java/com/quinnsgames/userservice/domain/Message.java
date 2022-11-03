@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,7 @@ public class Message {
 	private long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="MM/dd/yyyy, HH:mm:ss")
 	Date date;
 	
 	private String content;
