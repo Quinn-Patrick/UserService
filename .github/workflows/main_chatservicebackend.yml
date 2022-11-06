@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'ChatServiceBackend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_52B9366531574392B5C8789294E5D7C5 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6D8C4ED85E254F28A83875586838B9F3 }}
           package: '*.war'
