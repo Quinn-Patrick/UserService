@@ -1,4 +1,4 @@
-package com.quinnsgames.config;
+package com.quinnsgames.userservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         config.setApplicationDestinationPrefixes("/app");
     }
 	
-	@Bean
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
     	log.info("#####Registering Endpoint######");

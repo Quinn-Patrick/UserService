@@ -27,7 +27,7 @@ public class UserserviceApplication {
 		return new BCryptPasswordEncoder();
 	}
 	
-	@Bean
+	/*@Bean
 	CommandLineRunner run(UserService userService) {
 		return args -> {
 			userService.saveRole(new Role(null, "ROLE_USER"));
@@ -47,6 +47,6 @@ public class UserserviceApplication {
 			userService.addRoleToUser("User5", "ROLE_USER");
 			userService.addRoleToUser("User6", "ROLE_USER");
 		};
-	}
+	}*/
 
 }
