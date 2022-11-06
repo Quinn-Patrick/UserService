@@ -18,7 +18,7 @@ public class JpaConfig {
 		log.info(System.getenv("MYSQL_DB_URL"));
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url(System.getenv("jdbc:mysql://quinns-flexible-db-server.mysql.database.azure.com:3306/dwr_monster_api"))
+                .url("jdbc:mysql://quinns-flexible-db-server.mysql.database.azure.com:3306/dwr_monster_api")
                 .username(System.getenv("MYSQL_DB_USER"))
                 .password(System.getenv("MYSQL_DB_ROOT_PASSWORD"))
                 .build();
