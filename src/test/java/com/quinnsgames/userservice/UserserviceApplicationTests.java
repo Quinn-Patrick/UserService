@@ -1,4 +1,4 @@
-package com.quinnsgames.springBootJpa;
+package com.quinnsgames.userservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
