@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -14,6 +15,7 @@ import com.quinnsgames.userservice.domain.User;
 import com.quinnsgames.userservice.service.UserService;
 
 @SpringBootApplication
+@ComponentScan
 public class UserserviceApplication {
 
 	public static void main(String[] args) {
@@ -29,25 +31,21 @@ public class UserserviceApplication {
 	CommandLineRunner run(UserService userService) {
 		return args -> {
 			userService.saveRole(new Role(null, "ROLE_USER"));
-			userService.saveRole(new Role(null, "ROLE_MANAGER"));
-			userService.saveRole(new Role(null, "ROLE_ADMIN"));
-			userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 			
-			userService.saveUser(new User(null, "Quinn", "Quinn_Patrick", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "Gumwax", "GuyUser", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "Torbus", "Blaster5000", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "Glamwalch", "Shaggy", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "Sporkler", "Gonswaldo", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "Thambly", "Grenewald", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "User1", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "User2", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "User3", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "User4", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "User5", "1234", new ArrayList<>()));
+			userService.saveUser(new User(null, "User6", "1234", new ArrayList<>()));
 			
 			
-			userService.addRoleToUser("GuyUser", "ROLE_USER");
-			userService.addRoleToUser("GuyUser", "ROLE_MANAGER");
-			userService.addRoleToUser("Blaster5000", "ROLE_MANAGER");
-			userService.addRoleToUser("Gonswaldo", "ROLE_ADMIN");
-			userService.addRoleToUser("Shaggy", "ROLE_SUPER_ADMIN");
-			userService.addRoleToUser("Shaggy", "ROLE_ADMIN");
-			userService.addRoleToUser("Shaggy", "ROLE_USER");
+			userService.addRoleToUser("User1", "ROLE_USER");
+			userService.addRoleToUser("User2", "ROLE_USER");
+			userService.addRoleToUser("User3", "ROLE_USER");
+			userService.addRoleToUser("User4", "ROLE_USER");
+			userService.addRoleToUser("User5", "ROLE_USER");
+			userService.addRoleToUser("User6", "ROLE_USER");
 		};
 	}
 

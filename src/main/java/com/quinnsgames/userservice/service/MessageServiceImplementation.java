@@ -23,8 +23,6 @@ public class MessageServiceImplementation implements MessageService {
 
 	@Override
 	public List<Message> GetMessages(User user1, User user2) {
-		log.info("Retrieving messages shared between ", user1.getUsername(), " and ", user2.getUsername());
-		log.info(user1.getId().toString());
 		return messageRepo.findUserMessages(user1.getId(), user2.getId());
 	}
 

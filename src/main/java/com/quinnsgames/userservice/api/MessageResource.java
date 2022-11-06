@@ -41,7 +41,6 @@ public class MessageResource {
 	@CrossOrigin
 	@PostMapping(path="/message/send")
 	public ResponseEntity<String> postMessage(HttpServletRequest request, HttpServletResponse response, @RequestBody Message message) throws ServletException, IOException{
-		log.debug("Attempting to send message to server.");
 		if(!TokenAuthorizer.authorizeUser(response, request.getHeader(AUTHORIZATION), message.getUser1().getUsername())) {
 			return ResponseEntity.status(FORBIDDEN).body("{\"response\": \"Looks like you aren't in this room.\"}");
 		}
