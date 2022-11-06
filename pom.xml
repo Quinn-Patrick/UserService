@@ -79,11 +79,28 @@
 		    <version>20220320</version>
 		</dependency>
 		<dependency>
-		 <groupId>com.github.ulisesbocchio</groupId>
-		 <artifactId>jasypt-spring-boot-starter</artifactId>
-		 <version>LATEST</version>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>LATEST</version>
 		</dependency>
-				
+		
+		<dependency>
+	    	<groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>5.3.23</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-messaging</artifactId>
+		    <version>5.3.23</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-websocket</artifactId>
+		    <version>10.1.1</version>
+		</dependency>
+		
 		
 				
 	</dependencies>
