@@ -24,7 +24,7 @@ public class JpaConfig {
 		log.info(System.getenv("NUM_CORES"));
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://quinns-flexible-db-server.mysql.database.azure.com:3306/dwr_monster_api")
+                .url(environment.getProperty("MYSQL_DB_URL"))
                 .username(environment.getProperty("MYSQL_DB_USER"))
                 .password(environment.getProperty("MYSQL_DB_ROOT_PASSWORD"))
                 .build();
