@@ -22,6 +22,7 @@ public class JpaConfig {
 		log.info(System.getProperty("APPDATA"));
 		log.info(System.getProperty("COMPUTERNAME"));
 		log.info(System.getenv("NUM_CORES"));
+		log.info(System.getenv().toString());
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url(environment.getProperty("MYSQL_DB_URL"))
