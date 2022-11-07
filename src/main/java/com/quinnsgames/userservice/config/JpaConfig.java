@@ -16,6 +16,9 @@ public class JpaConfig {
 	@Bean
     public DataSource getDataSource() {
 		log.info(System.getenv("MYSQL_DB_URL"));
+		log.info(System.getenv("APPDATA"));
+		log.info(System.getenv("COMPUTERNAME"));
+		log.info(System.getenv("NUM_CORES"));
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://quinns-flexible-db-server.mysql.database.azure.com:3306/dwr_monster_api")
