@@ -47,7 +47,7 @@ public class SecurityConfig{
 		http.authorizeRequests().anyRequest().authenticated();
 		http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.addFilterAfter(new CORSFilter(), BasicAuthenticationFilter.class);
-		http.cors();
+		http.cors().disable();
 		
 		http.apply(CustomDsl.customDsl());
 		return http.build();
