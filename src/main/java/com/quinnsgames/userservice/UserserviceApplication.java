@@ -1,52 +1,31 @@
 package com.quinnsgames.userservice;
 
-import java.util.ArrayList;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 
-import com.quinnsgames.userservice.domain.Role;
-import com.quinnsgames.userservice.domain.User;
-import com.quinnsgames.userservice.service.UserService;
-
+//Welcome to Quinn's 1 on 1 chat app, created as a coding challenge for a job opportunity.
+//This is based on a Spring Security tutorial by AmigosCode which I completed long before this, although it is heavily modified.
+//I created a github repo called userservice from the tutorial, and forked it for the purposes of this project,
+//adding all messaging and websocket functionality.
 @SpringBootApplication
 @ComponentScan
+@EnableWebSocketMessageBroker
+@EnableWebSocket
 public class UserserviceApplication {
-
+	//Run from here.
 	public static void main(String[] args) {
 		SpringApplication.run(UserserviceApplication.class, args);
 	}
-	
+	//Register the password encoder bean.
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	/*@Bean
-	CommandLineRunner run(UserService userService) {
-		return args -> {
-			userService.saveRole(new Role(null, "ROLE_USER"));
-			
-			userService.saveUser(new User(null, "User1", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "User2", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "User3", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "User4", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "User5", "1234", new ArrayList<>()));
-			userService.saveUser(new User(null, "User6", "1234", new ArrayList<>()));
-			
-			
-			userService.addRoleToUser("User1", "ROLE_USER");
-			userService.addRoleToUser("User2", "ROLE_USER");
-			userService.addRoleToUser("User3", "ROLE_USER");
-			userService.addRoleToUser("User4", "ROLE_USER");
-			userService.addRoleToUser("User5", "ROLE_USER");
-			userService.addRoleToUser("User6", "ROLE_USER");
-		};
-	}*/
 
 }

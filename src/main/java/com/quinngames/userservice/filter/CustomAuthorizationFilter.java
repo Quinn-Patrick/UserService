@@ -15,6 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.quinnsgames.userservice.utility.TokenAuthorizer;
 
+//The authorization filter filters requests based on the authorization header.
 @CrossOrigin
 public class CustomAuthorizationFilter extends OncePerRequestFilter{
 

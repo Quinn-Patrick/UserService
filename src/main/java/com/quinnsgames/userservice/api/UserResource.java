@@ -40,6 +40,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+//This is the resource which exposes all of the endpoints necessary for adding and retrieving users.
 @RestController 
 @RequestMapping("/api") 
 @RequiredArgsConstructor
@@ -47,12 +48,14 @@ import lombok.extern.slf4j.Slf4j;
 public class UserResource {
 	private final UserService userService;
 	
+	//Retrieve every user.
 	@CrossOrigin
 	@GetMapping(path="/users")
 	public ResponseEntity<List<User>> getUsers(){
 		return ResponseEntity.ok().body(userService.getUsers());
 	}
 	
+	//Retrieve the user going by the given username, passed in the path.
 	@CrossOrigin
 	@GetMapping(path="/user/{username}")
 	public ResponseEntity<User> getUserByUsername(@PathVariable String username){
@@ -65,6 +68,8 @@ public class UserResource {
 		return ResponseEntity.ok(user);
 	}
 	
+	//Save a user to the database, as long as no one already has that name. They will automatically get the ROLE_USER role.
+	//This is used in signing up.
 	@CrossOrigin
 	@PostMapping(path="/user/save")
 	public ResponseEntity<User> saveUser(@RequestBody User user){
@@ -81,6 +86,7 @@ public class UserResource {
 		return ResponseEntity.created(uri).body(endUser);
 	}
 	
+	//Add a role to the database. Not used.
 	@CrossOrigin
 	@PostMapping(path="/role/save")
 	public ResponseEntity<Role> saveRole(@RequestBody Role role){
@@ -88,6 +94,7 @@ public class UserResource {
 		return ResponseEntity.created(uri).body(userService.saveRole(role));
 	}
 	
+	//Add a role to the user. Another vestige of the tutorial that would be useful in larger projects.
 	@CrossOrigin
 	@PostMapping(path="/role/addtouser")
 	public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form){
@@ -95,6 +102,7 @@ public class UserResource {
 		return ResponseEntity.ok().build();
 	}
 	
+	//Update a user's information by passing in an updated user.
 	@CrossOrigin
 	@PutMapping(path="/user/update")
 	public ResponseEntity<String> updateUser(HttpServletRequest request, HttpServletResponse response, @RequestBody User user, @RequestBody User updatedUser) throws ServletException, IOException{
@@ -102,13 +110,10 @@ public class UserResource {
 			return ResponseEntity.status(FORBIDDEN).body("Unauthorized user update.");
 		}
 		
-		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-		
-		User endUser = userService.updateUser(updatedUser);
-		
 		return ResponseEntity.ok().body("User updated successfully.");
 	}
 	
+	//Get a new access token for the given user, based on their refresh token. This functionality is not currently used.
 	@CrossOrigin
 	@GetMapping(path="/token/refresh")
 	public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException{

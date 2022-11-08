@@ -10,9 +10,8 @@ import com.quinnsgames.userservice.domain.User;
 import com.quinnsgames.userservice.repo.MessageRepo;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Service @RequiredArgsConstructor @Transactional @Slf4j
+@Service @RequiredArgsConstructor @Transactional
 public class MessageServiceImplementation implements MessageService {
 	private final MessageRepo messageRepo;
 

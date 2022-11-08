@@ -29,12 +29,16 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepo.findByUsername(username);
+		
+		//Make sure that the user is in the database.
 		if(user == null) {
 			log.error("User not found in the database.");
 			throw new UsernameNotFoundException("User not found in the database.");
 		}else {
 			log.info("User found in database {}", username);
 		}
+		
+		//It's a little extra work to make sure that the authorities are passed with the User object.
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		user.getRoles().forEach(role -> { 
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
@@ -42,6 +46,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
 	}
 	
+	//This asks the repo to save a user, like when someone new signs up. This is where the password encoder bean is called.
 	@Override
 	public User saveUser(User user) {
 		log.info("Saving new user {} to the database.", user.getUsername());
@@ -59,7 +64,6 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 	public void addRoleToUser(String username, String roleName) {
 		User user = userRepo.findByUsername(username);
 		Role role = roleRepo.findByName(roleName);
-		//log.info("Adding role {} to user {}", role.getName(), user.getName());
 		user.getRoles().add(role);
 	}
 

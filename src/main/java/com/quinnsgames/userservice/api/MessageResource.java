@@ -4,14 +4,12 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +26,17 @@ import com.quinnsgames.userservice.service.UserService;
 import com.quinnsgames.userservice.utility.TokenAuthorizer;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
+//This resource exposes the endpoints for sending and receiving messages through the database. 
+//This is not related to the websocket functionality.
 @RestController 
 @RequestMapping("/api") 
 @RequiredArgsConstructor
-@Slf4j
 public class MessageResource {
 	private final MessageService messageService;
 	private final UserService userService;
 	
+	//Messages coming to this endpoint are sent to the database, but only if the identity of user1 matches the identity of the user encoded in the access token.
 	@CrossOrigin
 	@PostMapping(path="/message/send")
 	public ResponseEntity<String> postMessage(HttpServletRequest request, HttpServletResponse response, @RequestBody Message message) throws ServletException, IOException{
@@ -54,6 +53,7 @@ public class MessageResource {
 		return ResponseEntity.ok("{\"response\": \"Message sent successfully.\"}");
 	}
 	
+	//This endpoint retrieves all messages shared by user1 and user2. Again, it makes sure that the users are correct.
 	@CrossOrigin
 	@GetMapping(path="/messages/{username1}/{username2}")
 	public ResponseEntity<List<Message>> GetMessages(HttpServletRequest request, HttpServletResponse response, @PathVariable String username1, @PathVariable String username2) throws ServletException, IOException{
