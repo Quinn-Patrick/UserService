@@ -95,11 +95,6 @@
 		    <artifactId>spring-messaging</artifactId>
 		    <version>5.3.23</version>
 		</dependency>
-		<dependency>
-		    <groupId>org.apache.tomcat</groupId>
-		    <artifactId>tomcat-websocket</artifactId>
-		    <version>10.1.1</version>
-		</dependency>
 		
 		
 				
