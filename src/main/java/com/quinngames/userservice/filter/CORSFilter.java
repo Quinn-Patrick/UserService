@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @WebFilter("/chat/*")
 public class CORSFilter implements Filter {
     
-    private final List<String> allowedOrigins = Arrays.asList("http://localhost:4200");
+    private final List<String> allowedOrigins = Arrays.asList("http://localhost:4200", "https://zealous-coast-01ea68a10.2.azurestaticapps.net");
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
