@@ -3,6 +3,11 @@
 
 name: Build and deploy JAR app to Azure Web App - ChatServiceBackend
 
+env:
+  MYSQL_DB_URL: ${{ secrets.MYSQL_DB_URL }}
+  MYSQL_DB_USER: ${{ secrets.MYSQL_DB_USER }}
+  MYSQL_DB_ROOT_PASSWORD: ${{ secrets.MYSQL_DB_ROOT_PASSWORD }}
+
 on:
   push:
     branches:
