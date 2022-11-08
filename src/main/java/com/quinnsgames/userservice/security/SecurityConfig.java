@@ -47,7 +47,7 @@ public class SecurityConfig{
 		http.authorizeRequests().anyRequest().authenticated();
 		http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.addFilterAfter(new CORSFilter(), BasicAuthenticationFilter.class);
-		http.cors().disable();
+		http.cors();
 		
 		http.apply(CustomDsl.customDsl());
 		return http.build();
@@ -63,15 +63,4 @@ public class SecurityConfig{
             }
         };
     }
-	
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-	  CorsConfiguration configuration = new CorsConfiguration();
-	  configuration.addAllowedOrigin("*");
-	  configuration.addAllowedHeader("*");
-	  configuration.addAllowedMethod("*");
-	  UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	  source.registerCorsConfiguration("/**", configuration);
-	  return source;
-	}
 }
