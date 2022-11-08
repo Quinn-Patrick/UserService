@@ -3,11 +3,6 @@
 
 name: Build and deploy JAR app to Azure Web App - ChatServiceBackend
 
-env:
-  MYSQL_DB_URL: ${{ secrets.MYSQL_DB_URL }}
-  MYSQL_DB_USER: ${{ secrets.MYSQL_DB_USER }}
-  MYSQL_DB_ROOT_PASSWORD: ${{ secrets.MYSQL_DB_ROOT_PASSWORD }}
-
 on:
   push:
     branches:
@@ -16,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -36,13 +31,12 @@ jobs:
           path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-      
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
@@ -55,5 +49,5 @@ jobs:
         with:
           app-name: 'ChatServiceBackend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4AC42F4B6CE14777A4440D4F3868C694 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B701F9FB623B4FD88CFB068D86AC6CCD }}
           package: '*.jar'
