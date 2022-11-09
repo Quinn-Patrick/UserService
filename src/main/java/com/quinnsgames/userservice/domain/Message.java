@@ -1,7 +1,5 @@
 package com.quinnsgames.userservice.domain;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,30 +12,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//The message model.
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 public class Message {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern="MM/dd/yyyy, HH:mm:ss")
+	@JsonFormat(pattern="MM/dd/yyyy, HH:mm:ss") //Note that the date must arrive in a particular format.
 	Date date;
 	
-	@Column(name="CONTENT",nullable=false,length=2048)
+	@Column(name="CONTENT",nullable=false,length=2048) //Messages can be up to 2048 characters in length.
 	private String content;
 	@ManyToOne(fetch = FetchType.EAGER)
-	private User user1;
+	private User user1;//user1 is always the sender.
 	@ManyToOne(fetch = FetchType.EAGER)
-	private User user2;
+	private User user2;//user2 is always the receiver.
 	
 	
 }

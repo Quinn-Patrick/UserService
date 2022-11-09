@@ -5,7 +5,6 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.HashMap;
@@ -70,11 +69,9 @@ public class TokenAuthorizer {
 		String[] chunks = token.split("\\.");
 		Base64.Decoder decoder = Base64.getUrlDecoder();
 		byte[] decoded = decoder.decode(chunks[1]);
-		log.info(Arrays.toString(decoded));
 		
 		JSONObject obj = new JSONObject(new String(decoded));
 		
-		log.info(obj.toString());
 		
 		String authorizedUserName = obj.getString("sub");
 		if(!authorizedUserName.equals(username)) {

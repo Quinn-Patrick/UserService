@@ -24,9 +24,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
+//This is the authentication filter, which is necessary for logging in and securing endpoints.
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	private final AuthenticationManager authenticationManager;
 	

@@ -1,8 +1,6 @@
 package com.quinngames.userservice.filter;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,12 +16,12 @@ import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
+//The purpose of this class is to ensure that responses all have the correct headers.
+//Without it, the Access-Control-Allow-Origin header may cause CORS issues.
 @Component
 @Slf4j
 @WebFilter("/chat/*")
 public class CORSFilter implements Filter {
-    
-    private final List<String> allowedOrigins = Arrays.asList("http://localhost:4200", "https://zealous-coast-01ea68a10.2.azurestaticapps.net");
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -36,7 +34,6 @@ public class CORSFilter implements Filter {
     	
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
-        String origin = request.getHeader("Origin");
         
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Credentials", "true");
